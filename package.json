@@ -1,5 +1,5 @@
 {
-  "name": "sphinx-btc-bot",
+  "name": "sphinx-rustoff-bot",
   "version": "1.0.0",
   "description": "Sphinx Bitcoin Price Bot",
   "main": "index.js",
@@ -26,10 +26,12 @@
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.10.5",
     "@babel/polyfill": "7.0.0",
     "@babel/preset-env": "7.1.0",
-    "@babel/core": "^7.1.2",
-    "@babel/node": "^7.10.5"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   },
   "babel": {
     "presets": [

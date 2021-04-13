@@ -31,7 +31,6 @@ var client;
 */
 
 var sphinxToken = process.env.SPHINX_TOKEN;
-var url = 'http://numbersapi.com/';
 
 function init() {
   return _init.apply(this, arguments);
@@ -62,7 +61,7 @@ function _init() {
                     switch (_context.prev = _context.next) {
                       case 0:
                         console.log('=> Installing');
-                        embed = new Sphinx.MessageEmbed().setAuthor('Num Bot').setDescription('Welcome to Num Bot! Enter /num followed by a space and any integer to get a number fact!').setThumbnail(botSVG);
+                        embed = new Sphinx.MessageEmbed().setAuthor('RustOff').setDescription('Welcome to RustOff! Enter /maxpaid followed by a number to set the maximum price for paid content.').setThumbnail(botSVG);
                         message.channel.send({
                           embed: embed
                         });
@@ -81,7 +80,7 @@ function _init() {
             }());
             client.on(msg_types.MESSAGE, /*#__PURE__*/function () {
               var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(message) {
-                var arr, urlString, printOut, embed;
+                var arr, maxAmount, printOut, embed;
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                   while (1) {
                     switch (_context2.prev = _context2.next) {
@@ -96,7 +95,7 @@ function _init() {
                         return _context2.abrupt("return");
 
                       case 3:
-                        if (!(arr[0] !== '/num')) {
+                        if (!(arr[0] !== '/maxpaid')) {
                           _context2.next = 5;
                           break;
                         }
@@ -104,20 +103,28 @@ function _init() {
                         return _context2.abrupt("return");
 
                       case 5:
-                        urlString = url + arr[1];
-                        console.log('URL String', urlString);
-                        _context2.next = 9;
+                        maxAmount = parseInt(arr[1]);
+
+                        if (maxAmount) {
+                          _context2.next = 8;
+                          break;
+                        }
+
+                        return _context2.abrupt("return");
+
+                      case 8:
+                        _context2.next = 10;
                         return fetchData(urlString);
 
-                      case 9:
+                      case 10:
                         printOut = _context2.sent;
                         console.log('printout', printOut);
-                        embed = new Sphinx.MessageEmbed().setAuthor('Number Bot').setTitle('Number Fact:').setDescription(printOut).setThumbnail(botSVG);
+                        embed = new Sphinx.MessageEmbed().setAuthor('RustOff Bot').setTitle('Number Fact:').setDescription(printOut).setThumbnail(botSVG);
                         message.channel.send({
                           embed: embed
                         });
 
-                      case 13:
+                      case 14:
                       case "end":
                         return _context2.stop();
                     }
