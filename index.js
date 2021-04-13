@@ -5,6 +5,7 @@ import axios from 'axios';
 require('dotenv').config();
 const msg_types = Sphinx.MSG_TYPE
 
+
 let initted = false
 let client
 
@@ -14,7 +15,6 @@ let client
 */
 
 const sphinxToken = process.env.SPHINX_TOKEN
-const url = 'http://numbersapi.com/'
 
 
 async function init() {
@@ -27,8 +27,8 @@ async function init() {
   client.on(msg_types.INSTALL, async (message) => {
     console.log('=> Installing')
     const embed = new Sphinx.MessageEmbed()
-      .setAuthor('Num Bot')
-      .setDescription('Welcome to Num Bot! Enter /num followed by a space and any integer to get a number fact!')
+      .setAuthor('RustOff')
+      .setDescription('Welcome to RustOff! Enter /maxpaid followed by a number to set the maximum price for paid content.')
       .setThumbnail(botSVG)
     message.channel.send({ embed })
   })
@@ -36,15 +36,15 @@ async function init() {
   client.on(msg_types.MESSAGE, async (message) => {
     const arr = message.content.split(' ')
     if (arr.length < 2) return
-    if (arr[0] !== '/num') return
-    const urlString = url + arr[1]
-    console.log('URL String', urlString)
+    if (arr[0] !== '/maxpaid') return
+    const maxAmount = parseInt(arr[1])
+    if(!maxAmount) return
 
     const printOut = await fetchData(urlString)
     console.log('printout', printOut)
 
     const embed = new Sphinx.MessageEmbed()
-      .setAuthor('Number Bot')
+      .setAuthor('RustOff Bot')
       .setTitle('Number Fact:')
       .setDescription(printOut)
       .setThumbnail(botSVG)
